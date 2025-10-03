@@ -28,12 +28,3 @@ Deberá cumplir estrictamente con los siguientes requisitos propios de programac
     2. Se debe programar dichos juegos evitando side-efects (toda función depende solamente de sus argumentos de entrada, siempre que se corra con los mismos argumentos, siempre devolverá el mismo resultado – determinismo total y las estructuras utilizadas son inmutables)
 
 El sistema debe jugarse por medio de una interfaz gráfica realizada en el lenguaje que deseen (puede ser el mismo F#) pero la implementación de la solución logística de ambos juegos debe realizarse en F# de forma estricta.
-
-Notas Finales para la Tarea:
-    • Tarea en grupos de máximo 2 personas
-    • Fecha de entrega: viernes 10 de octubre del 2025 antes de las 10:00 pm.
-    • Se recomienda que se empiece a trabajar desde hoy.
-    • Cualquier tipo de fraude será severamente castigado.
-    • La entrega del trabajo se hará a través del Tec-Digital.
-    • El trabajo debe ser implementado en el lenguaje F# como base y en el escogido para hacer GUI.
-lenguajes
