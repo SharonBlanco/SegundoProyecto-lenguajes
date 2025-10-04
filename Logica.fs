@@ -135,6 +135,12 @@ let buildBoardWithFill (placed: Placed) (rnd: Random) : char list list =
 
 // ====== Imprimir tablero
 
+let boardToPlaced (board: char list list) : Placed =
+    board
+    |> List.mapi (fun r fila ->
+        fila |> List.mapi (fun c ch -> ((r, c), ch)))
+    |> List.concat
+
 let printBoard (board: char list list) =
     // cabecera con columnas 0..9
     let header =
@@ -156,7 +162,7 @@ let printBoard (board: char list list) =
 
 // ====== Organizar matriz con palabras
 
-let organizarMatriz (rnd: Random) (forbidden: Coord list) (palabras: string list) =
+let organizarSoloPalabras (rnd: Random) (forbidden: Coord list) (palabras: string list) =
     let palabrasOrd = palabras |> List.sortByDescending (fun w -> w.Length) // largas primero
     let rec loop placed skipped rest =               // recursión sobre palabras restantes
         match rest with
@@ -170,6 +176,11 @@ let organizarMatriz (rnd: Random) (forbidden: Coord list) (palabras: string list
                 let placed', seg = colocar placed cand    //   actualizamos tablero y solución
                 loop placed'  skipped ws   //   seguimos con el resto
     loop [] [] palabrasOrd                             // llamada inicial con acumuladores vacíos
+let organizarMatriz (rnd: Random) (forbidden: Coord list) (palabras: string list) : Placed * string list =
+    let placed, skipped = organizarSoloPalabras rnd forbidden palabras
+    let board = buildBoardWithFill placed rnd
+    let fullPlaced = boardToPlaced board
+    (fullPlaced, skipped)
 
 // ====== Filtrar palabras desde archivo
 
@@ -250,11 +261,13 @@ let solucion (ruta: (Coord * char) list) (word: char list) : bool =
     letrasRuta = word
     
 let rec profaux (rutas: (Coord * char) list list) (placed: Placed) (word: char list) =
+    
     match rutas with
     | [] ->
         printfn "ruta no encontrada"
         None
     | ruta :: rs ->
+        //printfn "%A" ruta
         if solucion ruta word then
             // ruta completa (ya contiene todas las
             printfn "%A " ruta
@@ -278,15 +291,6 @@ let prof (placed: Placed) (word: string) =
 
 
 
-
-
-
-
-
-
-
-
-
 (*
 [<EntryPoint>]                                              // atributo: punto de entrada
 let main argv =
@@ -294,7 +298,8 @@ let main argv =
     let lineas =
         if File.Exists ruta then File.ReadAllLines(ruta) |> Array.toList // lee archivo si existe
         else [ "camarote"; "teclado"; "casa"; "perro"; "gato"; "sopa"; "letras" ] // fallback
-
+   
+    
 
 
     let palabras = guardarPalabras 3 10 lineas              // valida palabras (3..10, solo letras)
@@ -305,7 +310,9 @@ let main argv =
     let board = buildBoardWithFill placed rnd               // construye matriz final con relleno
 
     printBoard board                                        // imprime el tablero en consola
-
+    let board = buildBoardWithFill placed rnd
+    let fullPlaced = boardToPlaced board
+    printfn "%A" fullPlaced
 
     if not skipped.IsEmpty then                             // si hubo saltadas, listarlas
         printfn "\nSaltadas (%d): %s" skipped.Length (String.concat ", " skipped)
@@ -313,13 +320,13 @@ let main argv =
     let neighborns = vecinos (1,3)
     
 
-    let busqueda = prof placed "camarote"
-    let busqueda = prof placed "teclado"
-    let busqueda = prof placed "casa"
-    let busqueda = prof placed "perro"
-    let busqueda = prof placed "gato"
-    let busqueda = prof placed "sopa"
-    let busqueda = prof placed "letras"
+    let busqueda = prof fullPlaced "camarote"
+    //let busqueda = prof placed "teclado"
+    let busqueda = prof fullPlaced "casa"
+    let busqueda = prof fullPlaced "perro"
+    let busqueda = prof fullPlaced "gato"
+    let busqueda = prof fullPlaced "sopa"
+    let busqueda = prof fullPlaced "letras"
     
 
-    0       *)                                                // código de salida del programa
+    0   *)                                                   // código de salida del programa

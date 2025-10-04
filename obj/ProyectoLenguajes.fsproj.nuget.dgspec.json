@@ -21,7 +21,7 @@
         ],
         "sources": {
           "/usr/lib64/dotnet/library-packs": {},
-          "/usr/lib64/dotnet/sdk/9.0.109/FSharp/library-packs": {},
+          "/usr/lib64/dotnet/sdk/9.0.110/FSharp/library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -72,7 +72,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/lib64/dotnet/sdk/9.0.109/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/lib64/dotnet/sdk/9.0.110/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

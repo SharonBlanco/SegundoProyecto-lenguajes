@@ -10,7 +10,7 @@ open System.Reflection
 [<assembly: System.Reflection.AssemblyCompanyAttribute("ProyectoLenguajes")>]
 [<assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")>]
 [<assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")>]
-[<assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0e7bf5933b05a1afb900efedb003e774aac6fa98")>]
+[<assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+894ba697178c2cc6e6aa526aa006071418480ff3")>]
 [<assembly: System.Reflection.AssemblyProductAttribute("ProyectoLenguajes")>]
 [<assembly: System.Reflection.AssemblyTitleAttribute("ProyectoLenguajes")>]
 [<assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")>]

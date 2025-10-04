@@ -6,6 +6,19 @@ open System.Text.Json
 open System.Text.Json.Serialization
 open ProyectoLenguajes.Logica
 
+
+
+type CeldaDto = {
+    columna : int
+    fila    : int
+    letra   : string
+}
+
+type BuscarMatrizPeticion = {
+    placed  : CeldaDto list
+    palabra : string
+}
+
 // Convertimos el tablero (char list list) a JSON-friendly formato: list<list<string>>
 let boardToJson (board: char list list) : string =
     board
@@ -13,49 +26,79 @@ let boardToJson (board: char list list) : string =
     |> JsonSerializer.Serialize
 
 // ==== Handler para POST /api/matriz con lista de palabras JSON en el body
+// ==== Handler para POST /api/matriz con lista de palabras JSON en el body
 let crearMatrizHandler : HttpHandler =
     fun next ctx ->
         task {
-            // Intenta leer lista de palabras del cuerpo de la solicitud (JSON array)
+            // ✅ Leer las palabras desde el cuerpo de la solicitud (JSON)
             let! palabras = ctx.BindJsonAsync<string list>()
 
             let forbidden : Coord list = []
             let rnd = System.Random()
 
-            // Usamos organizarMatriz para generar el tablero
+            // ✅ Generar placed con tus palabras
             let placed, _ = organizarMatriz rnd forbidden palabras
-            let board = buildBoardWithFill placed rnd
-            
-            return! ctx.WriteJsonAsync(board |> List.map (List.map string))
 
+            // ✅ Construir el tablero completo con letras de relleno
+            let board = buildBoardWithFill placed rnd
+
+            // ✅ Transformar placed a formato JSON-friendly (lista de objetos con fila, columna y letra)
+            let placedJson =
+                placed
+                |> List.map (fun ((x, y), ch) ->
+                    {| fila = x; columna = y; letra = string ch |})
+
+            // ✅ Empaquetar todo en un solo objeto JSON
+            let response =
+                {| placed = placedJson |}
+
+            // ✅ Enviar al cliente
+            return! ctx.WriteJsonAsync(response)
         }
 
+
+
 // ==== Handler para GET /api/buscar?palabra=loquesea
+// === Tipo esperado en el JSON
+
+// ==== Nuevo handler para POST /api/buscar
 let buscarHandler : HttpHandler =
     fun next ctx ->
         task {
-            match ctx.TryGetQueryStringValue "palabra" with
-            | Some palabra ->
-                // Simulación: usás un placed vacío, pero lo podés cambiar si querés cachearlo
-                let placed : Placed = [] // <- cambiá esto si querés usar el placed real
-                let resultado = prof placed palabra
+            let! body = ctx.BindJsonAsync<BuscarMatrizPeticion>()
 
-                match resultado with
-                | Some ruta ->
-                    let texto =
-                        ruta
-                        |> List.map (fun ((x, y), ch) -> $"{ch}({x},{y})")
-                        |> String.concat " → "
-                    return! ctx.WriteTextAsync($"Ruta: {texto}")
-                | None ->
-                    return! ctx.WriteTextAsync("Palabra no encontrada")
+            // Convertimos la matriz completa a Placed ((Coord * char) list)
+            let placed : Placed =
+                body.placed
+                |> List.choose (fun c ->
+                    c.letra
+                    |> Seq.tryHead
+                    |> Option.map (fun ch -> ((c.fila, c.columna), System.Char.ToUpper ch))
+                )
+
+            // Normaliza la palabra a la misma convención
+            let palabra = body.palabra.ToUpperInvariant()
+
+            let resultado = prof placed palabra
+
+            match resultado with
+            | Some ruta ->
+                let texto =
+                    ruta
+                    |> List.map (fun ((x, y), ch) -> $"{ch}({x},{y})")
+                    |> String.concat " → "
+                return! ctx.WriteTextAsync($"Ruta: {texto}")
             | None ->
-                return! ctx.WriteTextAsync("Falta el parámetro 'palabra'")
+                return! ctx.WriteTextAsync("Palabra no encontrada")
         }
+
+
+
 
 // === webApp conecta rutas con handlers
 let webApp : HttpHandler =
     choose [
         POST >=> route "/api/matriz" >=> crearMatrizHandler
-        GET  >=> route "/api/buscar" >=> buscarHandler
+        POST >=> route "/api/buscar" >=> buscarHandler  // AHORA ES POST, no GET
     ]
+
