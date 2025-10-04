@@ -135,36 +135,40 @@ let buildBoardWithFill (placed: Placed) (rnd: Random) : char list list =
 // ====== Imprimir tablero
 
 let printBoard (board: char list list) =
-    let header =                                             // cabecera columnas A..J
-        let cols = [0..N-1] |> List.map (fun c -> char (int 'A' + c))
-        "/ | " + (String.concat " " (cols |> List.map string)) // formato "/ | A B C ..."
-    printfn "%s" header                                      // imprime cabecera
-    printfn "%s" (String.replicate (3 + 2*N) "-")            // línea separadora
+    // cabecera con columnas 0..9
+    let header =
+        let cols = [0..N-1] |> List.map string
+        "   | " + (String.concat " " cols)
+    printfn "%s" header
+    printfn "%s" (String.replicate (4 + 2*N) "-")
+
     board
-    |> List.mapi (fun i row ->                               // mapea filas con índice i
-        let num = i+1                                        // numeración 1..10
-        let prefix = if num < 10 then sprintf "%d |" num else sprintf "%d|" num // ancho
-        let line = row |> List.map string |> String.concat " " // une letras con espacios
-        sprintf "%s %s" prefix line)                         // arma la línea completa
-    |> List.iter (printfn "%s")                              // imprime cada fila
-    printfn ""                                               // línea en blanco final
+    |> List.mapi (fun i row ->
+        // filas también con índice 0..9
+        let prefix = sprintf "%d |" i
+        let line = row |> List.map string |> String.concat " "
+        sprintf "%s %s" prefix line)
+    |> List.iter (printfn "%s")
+
+    printfn ""
+                                             // línea en blanco final
 
 // ====== Organizar matriz con palabras
 
 let organizarMatriz (rnd: Random) (forbidden: Coord list) (palabras: string list) =
     let palabrasOrd = palabras |> List.sortByDescending (fun w -> w.Length) // largas primero
-    let rec loop placed sols skipped rest =               // recursión sobre palabras restantes
+    let rec loop placed skipped rest =               // recursión sobre palabras restantes
         match rest with
-        | [] -> placed, List.rev sols, List.rev skipped   // fin: devuelve tablero, soluciones, saltadas
+        | [] -> placed, List.rev skipped   // fin: devuelve tablero, soluciones, saltadas
         | w::ws ->
             let cands = generarCandidatos w               // todos los candidatos para w
             match elegirMejor forbidden placed rnd cands with
             | None ->                                     // si no hay dónde ponerla:
-                loop placed sols (w::skipped) ws          //   la marcamos como saltada
+                loop placed (w::skipped) ws          //   la marcamos como saltada
             | Some cand ->                                // si hay candidato elegido:
                 let placed', seg = colocar placed cand    //   actualizamos tablero y solución
-                loop placed' ((w,seg)::sols) skipped ws   //   seguimos con el resto
-    loop [] [] [] palabrasOrd                             // llamada inicial con acumuladores vacíos
+                loop placed'  skipped ws   //   seguimos con el resto
+    loop [] [] palabrasOrd                             // llamada inicial con acumuladores vacíos
 
 // ====== Filtrar palabras desde archivo
 
@@ -211,22 +215,27 @@ let vecinos (coord: Coord) (placed: Placed) : (Coord * char) list =
         | None -> None)             // si no, lo descarta
 
  
-let extender (rutas: (Coord * char) list list) (placed: Placed) (word: char list): ((Coord * char) list) list =
+let extender (rutas: (Coord * char) list list) (placed: Placed) (word: char list)
+  : ((Coord * char) list) list =
   rutas
   |> List.collect (function
        | [] -> []
        | (actual :: _) as ruta ->
-           let coord = fst actual  // obtenemos solo la coordenada
-           let vecinosCoord = vecinos coord placed
-           //printfn "Vecinos de %A: %A" coord vecinosCoord
-           vecinosCoord
-           |> List.choose (fun (c, ch) ->
-               if List.exists (fun (cRuta,_) -> cRuta = c) ruta then
-                   None
-               else if word = [] || List.head word <> ch then
-                   None
-               else
-                   Some ((c, ch) :: ruta)))
+           // letras ya consumidas por ESTA ruta
+           let consumed = List.length ruta
+           // próxima letra esperada para ESTA ruta
+           match List.tryItem consumed word with
+           | None ->
+               // ya no hay más letras por consumir → esta ruta no se extiende
+               []
+           | Some expected ->
+               let coord = fst actual
+               vecinos coord placed
+               |> List.choose (fun (c, ch) ->
+                   if ch = expected && not (List.exists (fun (cRuta,_) -> cRuta = c) ruta) then
+                       Some ((c, ch) :: ruta)   // extiende la ruta
+                   else
+                       None))
 
 
 let buscarPrimeros (placed: Placed) (word: char list) : ((Coord * char) list) list =
@@ -239,24 +248,23 @@ let solucion (ruta: (Coord * char) list) (word: char list) : bool =
     let letrasRuta = ruta |> List.rev |> List.map snd
     letrasRuta = word
     
-let profaux (rutas: (Coord * char) list list) (placed: Placed) (word: char list) =
-    let rec loop routes placed ww =
-        match routes, ww with
-        | [], _ ->
-            printfn "ruta no encontrada"
-            None
-        | ruta :: rs, ww ->
-            //printfn "%A " ruta
-            if solucion ruta word then
-                printfn "%A " ruta
-                Some (List.rev ruta)
-            else
-                // usamos List.tail en vez de ww.Tail
-                let tailWord = List.tail ww
-                let nuevas = extender [ruta] placed ww.Tail
-                loop (nuevas @ rs) placed ww.Tail
-                
-    loop rutas placed word
+let rec profaux (rutas: (Coord * char) list list) (placed: Placed) (word: char list) =
+    match rutas with
+    | [] ->
+        printfn "ruta no encontrada"
+        None
+    | ruta :: rs ->
+        if solucion ruta word then
+            // ruta completa (ya contiene todas las
+            printfn "%A " ruta
+            Some (List.rev ruta)
+        else
+            // extender SOLO esta ruta; 'extender' decide la letra que toca según el largo
+            let nuevas = extender [ruta] placed word
+            // si no se pudo extender, simplemente desaparece; seguimos con el resto
+            profaux (nuevas @ rs) placed word
+
+               
     // aquí llamamos a loop para arrancar
 
 
@@ -286,17 +294,16 @@ let main argv =
         if File.Exists ruta then File.ReadAllLines(ruta) |> Array.toList // lee archivo si existe
         else [ "camarote"; "teclado"; "casa"; "perro"; "gato"; "sopa"; "letras" ] // fallback
 
+
+
     let palabras = guardarPalabras 3 10 lineas              // valida palabras (3..10, solo letras)
     let forbidden : Coord list = []                         // lista de coords prohibidas (vacía)
 
     let rnd = Random()                                      // generador aleatorio único
-    let placed, solutions, skipped = organizarMatriz rnd forbidden palabras // coloca palabras
+    let placed, skipped = organizarMatriz rnd forbidden palabras // coloca palabras
     let board = buildBoardWithFill placed rnd               // construye matriz final con relleno
 
     printBoard board                                        // imprime el tablero en consola
-
-    printfn "Soluciones:"                                   // imprime soluciones (extremos)
-    imprimirSoluciones solutions
 
 
     if not skipped.IsEmpty then                             // si hubo saltadas, listarlas
@@ -304,22 +311,14 @@ let main argv =
 
     let neighborns = vecinos (1,3)
     
-    // let placed = [ ((1,1), 'a'); ((1,2), 'b'); ((2,2), 'c') ]
-    // let rutas = [ [((1,1), 'a')] ]
-    // let palabraRestante = ['b'; 'c']
-
-    // let nuevas = extender rutas placed palabraRestante
-
-    // for (ruta) in nuevas do
-    //     printfn "Ruta: %A | Restante: %A" ruta 
 
     let busqueda = prof placed "camarote"
-
-    //printf "%A" busqueda
+    let busqueda = prof placed "teclado"
+    let busqueda = prof placed "casa"
+    let busqueda = prof placed "perro"
+    let busqueda = prof placed "gato"
+    let busqueda = prof placed "sopa"
+    let busqueda = prof placed "letras"
+    
 
     0                                                       // código de salida del programa
-
-
-
-
-

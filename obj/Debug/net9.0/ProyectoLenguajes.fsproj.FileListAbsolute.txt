@@ -27,3 +27,4 @@
 /home/sharonblancopiedra/Documents/V SEMESTRE/LENGUAJES/SEMANA 9/ProyectoLenguajes/obj/Debug/net9.0/ProyectoLenguajes.pdb
 /home/sharonblancopiedra/Documents/V SEMESTRE/LENGUAJES/SEMANA 9/ProyectoLenguajes/obj/Debug/net9.0/ProyectoLenguajes.genruntimeconfig.cache
 /home/sharonblancopiedra/Documents/V SEMESTRE/LENGUAJES/SEMANA 9/ProyectoLenguajes/obj/Debug/net9.0/ref/ProyectoLenguajes.dll
+/home/sharonblancopiedra/Documents/V SEMESTRE/LENGUAJES/SEMANA 9/ProyectoLenguajes/obj/Debug/net9.0/ProyectoLenguajes.sourcelink.json
