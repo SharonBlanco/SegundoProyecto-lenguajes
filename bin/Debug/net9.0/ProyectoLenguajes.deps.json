@@ -8,7 +8,8 @@
     ".NETCoreApp,Version=v9.0": {
       "ProyectoLenguajes/1.0.0": {
         "dependencies": {
-          "FSharp.Core": "9.0.101"
+          "FSharp.Core": "9.0.101",
+          "Giraffe": "7.0.2"
         },
         "runtime": {
           "ProyectoLenguajes.dll": {}
@@ -62,7 +63,54 @@
             "locale": "zh-Hant"
           }
         }
-      }
+      },
+      "FSharp.SystemTextJson/1.3.13": {
+        "dependencies": {
+          "FSharp.Core": "9.0.101",
+          "System.Text.Json": "8.0.5"
+        },
+        "runtime": {
+          "lib/netstandard2.0/FSharp.SystemTextJson.dll": {
+            "assemblyVersion": "1.3.0.0",
+            "fileVersion": "1.3.13.11246"
+          }
+        }
+      },
+      "Giraffe/7.0.2": {
+        "dependencies": {
+          "FSharp.Core": "9.0.101",
+          "FSharp.SystemTextJson": "1.3.13",
+          "Giraffe.ViewEngine": "1.4.0",
+          "Microsoft.IO.RecyclableMemoryStream": "3.0.1",
+          "System.Text.Json": "8.0.5"
+        },
+        "runtime": {
+          "lib/net8.0/Giraffe.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Giraffe.ViewEngine/1.4.0": {
+        "dependencies": {
+          "FSharp.Core": "9.0.101"
+        },
+        "runtime": {
+          "lib/net5.0/Giraffe.ViewEngine.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Microsoft.IO.RecyclableMemoryStream/3.0.1": {
+        "runtime": {
+          "lib/net6.0/Microsoft.IO.RecyclableMemoryStream.dll": {
+            "assemblyVersion": "3.0.1.0",
+            "fileVersion": "3.0.1.0"
+          }
+        }
+      },
+      "System.Text.Json/8.0.5": {}
     }
   },
   "libraries": {
@@ -77,6 +125,41 @@
       "sha512": "sha512-rAS0Pkf1mM9JQ3ksCzAxgzCv/AnIpzpSTHgCjXvHY8pfA2eMmwNtBHqr3AHTNGC/wh9fNvW2vrDyuVP/Qic9pw==",
       "path": "fsharp.core/9.0.101",
       "hashPath": "fsharp.core.9.0.101.nupkg.sha512"
+    },
+    "FSharp.SystemTextJson/1.3.13": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-znp8odpdkVGKVX0AvbhiXdmeMi0KJ+A4AyAQWSkfAEAe4Z4clRE+rVhrLnAGrFD1VEIUX2lsQ4o84ywpWZUSGw==",
+      "path": "fsharp.systemtextjson/1.3.13",
+      "hashPath": "fsharp.systemtextjson.1.3.13.nupkg.sha512"
+    },
+    "Giraffe/7.0.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-AwUqNORb9OmsqIGTAmbQtZBHoWz0yxACHA/xJqby3usUaqBUmrcz5dflVzPWUvqkulWPntwdRkQlzdt9zeEr6Q==",
+      "path": "giraffe/7.0.2",
+      "hashPath": "giraffe.7.0.2.nupkg.sha512"
+    },
+    "Giraffe.ViewEngine/1.4.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-gWzlp8KGDLaPHMm/xGzfLT1e9wZaJhBKhEuMsPRBSn7wAMkSgMcaqJlWl8mFGCcOOx0r9UyDJvCJJQyljYmo+g==",
+      "path": "giraffe.viewengine/1.4.0",
+      "hashPath": "giraffe.viewengine.1.4.0.nupkg.sha512"
+    },
+    "Microsoft.IO.RecyclableMemoryStream/3.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-s/s20YTVY9r9TPfTrN5g8zPF1YhwxyqO6PxUkrYTGI2B+OGPe9AdajWZrLhFqXIvqIW23fnUE4+ztrUWNU1+9g==",
+      "path": "microsoft.io.recyclablememorystream/3.0.1",
+      "hashPath": "microsoft.io.recyclablememorystream.3.0.1.nupkg.sha512"
+    },
+    "System.Text.Json/8.0.5": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-0f1B50Ss7rqxXiaBJyzUu9bWFOO2/zSlifZ/UNMdiIpDYe4cY4LQQicP4nirK1OS31I43rn062UIJ1Q9bpmHpg==",
+      "path": "system.text.json/8.0.5",
+      "hashPath": "system.text.json.8.0.5.nupkg.sha512"
     }
   }
 }

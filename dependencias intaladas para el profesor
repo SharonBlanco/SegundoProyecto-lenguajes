@@ -1,0 +1,3 @@
+dotnet add package Giraffe
+dotnet add package Microsoft.AspNetCore.App
+dotnet add package Microsoft.AspNetCore.Hosting
