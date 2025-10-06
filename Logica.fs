@@ -124,7 +124,7 @@ let colocar (placed: Placed) (cand: Candidate) : Placed * (Coord * Coord) =
 // ====== Construir tablero con letras de relleno
 
 let buildBoardWithFill (placed: Placed) (rnd: Random) : char list list =
-    let letter () = char (int 'a' + rnd.Next(26))            // letra aleatoria 'a'..'z'
+    let letter () =  char (97 + rnd.Next(26))          // letra aleatoria 'a'..'z'
     let cell r c =                                           // caracter que irá en (r,c)
         match tryLookup (r,c) placed with
         | Some ch -> ch                                      // si ya hay letra, úsala
@@ -226,6 +226,21 @@ let vecinos (coord: Coord) (placed: Placed) : (Coord * char) list =
         | Some ch -> Some (c, ch)   // si hay letra, devuelve (Coord, char)
         | None -> None)             // si no, lo descarta
 
+let direccionConstante (ruta: (Coord * char) list) : bool =
+    match ruta |> List.map fst |> List.rev with
+    | [] | [_] -> true // 0 o 1 coord: siempre válida
+    | (r1, c1) :: (r2, c2) :: rest ->
+        let dr = r2 - r1
+        let dc = c2 - c1
+        let rec check prevR prevC rem =
+            match rem with
+            | [] -> true
+            | (r, c) :: tail ->
+                if (r - prevR, c - prevC) = (dr, dc)
+                then check r c tail
+                else false
+        check r2 c2 rest
+
  
 let extender (rutas: (Coord * char) list list) (placed: Placed) (word: char list)
   : ((Coord * char) list) list =
@@ -268,7 +283,7 @@ let rec profaux (rutas: (Coord * char) list list) (placed: Placed) (word: char l
         None
     | ruta :: rs ->
         //printfn "%A" ruta
-        if solucion ruta word then
+        if solucion ruta word && direccionConstante ruta then
             // ruta completa (ya contiene todas las
             printfn "%A " ruta
             Some (List.rev ruta)

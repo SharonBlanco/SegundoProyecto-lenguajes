@@ -32,15 +32,16 @@ let crearMatrizHandler : HttpHandler =
         task {
             // ✅ Leer las palabras desde el cuerpo de la solicitud (JSON)
             let! palabras = ctx.BindJsonAsync<string list>()
+            let palabrasFiltradas =
+                guardarPalabras 3 10 palabras
+                |> List.truncate 10
 
             let forbidden : Coord list = []
             let rnd = System.Random()
 
             // ✅ Generar placed con tus palabras
-            let placed, _ = organizarMatriz rnd forbidden palabras
+            let placed, _ = organizarMatriz rnd forbidden palabrasFiltradas
 
-            // ✅ Construir el tablero completo con letras de relleno
-            let board = buildBoardWithFill placed rnd
 
             // ✅ Transformar placed a formato JSON-friendly (lista de objetos con fila, columna y letra)
             let placedJson =
@@ -50,7 +51,7 @@ let crearMatrizHandler : HttpHandler =
 
             // ✅ Empaquetar todo en un solo objeto JSON
             let response =
-                {| placed = placedJson |}
+                 {| palabrasFiltradas = palabrasFiltradas; placed = placedJson |}
 
             // ✅ Enviar al cliente
             return! ctx.WriteJsonAsync(response)
@@ -86,10 +87,12 @@ let buscarHandler : HttpHandler =
                 let texto =
                     ruta
                     |> List.map (fun ((x, y), ch) -> $"{ch}({x},{y})")
-                    |> String.concat " → "
+                    |> String.concat "; "
+
                 return! ctx.WriteTextAsync($"Ruta: {texto}")
             | None ->
                 return! ctx.WriteTextAsync("Palabra no encontrada")
+
         }
 
 

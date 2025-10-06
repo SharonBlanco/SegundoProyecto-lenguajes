@@ -1,29 +1,39 @@
-module Program// Importamos las librerías necesarias
+module Program
 
 open System
-                    // Funciones básicas de .NET (como consola, fecha, etc.)
-open Microsoft.AspNetCore.Builder        // Para construir la app web
-open Microsoft.AspNetCore.Hosting        // Para configurar y alojar el servidor web
-open Microsoft.Extensions.Hosting        // Para crear el "host" de la app
-open Microsoft.Extensions.DependencyInjection // Para registrar servicios necesarios
-open Giraffe                             // Giraffe es el framework web funcional para F#
+open Microsoft.AspNetCore.Builder
+open Microsoft.AspNetCore.Hosting
+open Microsoft.Extensions.Hosting
+open Microsoft.Extensions.DependencyInjection
+open Microsoft.AspNetCore.Cors.Infrastructure
 open Api
+open Giraffe
 
-// Esta es la función principal del programa, la que se ejecuta cuando corres tu app
 [<EntryPoint>]
 let main args =
     Host.CreateDefaultBuilder(args)
         .ConfigureWebHostDefaults(fun webBuilder ->
             webBuilder
                 .UseUrls("http://localhost:5000")
-                .Configure(fun app -> 
-                    app.UseGiraffe Api.webApp) 
+                .Configure(fun app ->
+                    // ✅ habilitamos CORS antes de Giraffe
+                    app.UseCors("AllowFrontend") |> ignore
+                    app.UseGiraffe(Api.webApp)
+                )
                 .ConfigureServices(fun services ->
+                    // ✅ registramos Giraffe y la política CORS
                     services.AddGiraffe() |> ignore
+                    services.AddCors(fun options ->
+                        options.AddPolicy("AllowFrontend", fun policy ->
+                            policy
+                                .WithOrigins("http://localhost:5173") // tu frontend
+                                .AllowAnyHeader()
+                                .AllowAnyMethod()
+                                |> ignore
+                        )
+                    ) |> ignore
                 )
             |> ignore)
         .Build()
         .Run()
     0
-
-
