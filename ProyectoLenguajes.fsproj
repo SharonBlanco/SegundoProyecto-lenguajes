@@ -6,7 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="palabras.txt" />
     <Compile Include="Logica.fs" />
     <Compile Include="Api.fs" />
     <Compile Include="Program.fs" />

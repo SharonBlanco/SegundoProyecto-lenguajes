@@ -30,7 +30,7 @@ let boardToJson (board: char list list) : string =
 let crearMatrizHandler : HttpHandler =
     fun next ctx ->
         task {
-            // ✅ Leer las palabras desde el cuerpo de la solicitud (JSON)
+            //  Leer las palabras desde el cuerpo de la solicitud (JSON)
             let! palabras = ctx.BindJsonAsync<string list>()
             let palabrasFiltradas =
                 guardarPalabras 3 10 palabras
@@ -39,21 +39,21 @@ let crearMatrizHandler : HttpHandler =
             let forbidden : Coord list = []
             let rnd = System.Random()
 
-            // ✅ Generar placed con tus palabras
+            //  Generar placed con tus palabras
             let placed, _ = organizarMatriz rnd forbidden palabrasFiltradas
 
 
-            // ✅ Transformar placed a formato JSON-friendly (lista de objetos con fila, columna y letra)
+            //  Transformar placed a formato JSON-friendly (lista de objetos con fila, columna y letra)
             let placedJson =
                 placed
                 |> List.map (fun ((x, y), ch) ->
                     {| fila = x; columna = y; letra = string ch |})
 
-            // ✅ Empaquetar todo en un solo objeto JSON
+            //  Empaquetar todo en un solo objeto JSON
             let response =
                  {| palabrasFiltradas = palabrasFiltradas; placed = placedJson |}
 
-            // ✅ Enviar al cliente
+            //  Enviar al cliente
             return! ctx.WriteJsonAsync(response)
         }
 

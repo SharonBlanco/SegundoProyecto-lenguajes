@@ -305,43 +305,4 @@ let prof (placed: Placed) (word: string) =
     profaux iniciales placed letras
 
 
-
-(*
-[<EntryPoint>]                                              // atributo: punto de entrada
-let main argv =
-    let ruta = "archivo.txt"                                // archivo de entrada (opcional)
-    let lineas =
-        if File.Exists ruta then File.ReadAllLines(ruta) |> Array.toList // lee archivo si existe
-        else [ "camarote"; "teclado"; "casa"; "perro"; "gato"; "sopa"; "letras" ] // fallback
-   
-    
-
-
-    let palabras = guardarPalabras 3 10 lineas              // valida palabras (3..10, solo letras)
-    let forbidden : Coord list = []                         // lista de coords prohibidas (vacía)
-
-    let rnd = Random()                                      // generador aleatorio único
-    let placed, skipped = organizarMatriz rnd forbidden palabras // coloca palabras
-    let board = buildBoardWithFill placed rnd               // construye matriz final con relleno
-
-    printBoard board                                        // imprime el tablero en consola
-    let board = buildBoardWithFill placed rnd
-    let fullPlaced = boardToPlaced board
-    printfn "%A" fullPlaced
-
-    if not skipped.IsEmpty then                             // si hubo saltadas, listarlas
-        printfn "\nSaltadas (%d): %s" skipped.Length (String.concat ", " skipped)
-
-    let neighborns = vecinos (1,3)
-    
-
-    let busqueda = prof fullPlaced "camarote"
-    //let busqueda = prof placed "teclado"
-    let busqueda = prof fullPlaced "casa"
-    let busqueda = prof fullPlaced "perro"
-    let busqueda = prof fullPlaced "gato"
-    let busqueda = prof fullPlaced "sopa"
-    let busqueda = prof fullPlaced "letras"
-    
-
-    0   *)                                                   // código de salida del programa
+                                               // código de salida del programa

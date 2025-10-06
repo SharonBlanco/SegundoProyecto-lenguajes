@@ -16,12 +16,12 @@ let main args =
             webBuilder
                 .UseUrls("http://localhost:5000")
                 .Configure(fun app ->
-                    // ✅ habilitamos CORS antes de Giraffe
+                    // habilitamos CORS antes de Giraffe
                     app.UseCors("AllowFrontend") |> ignore
                     app.UseGiraffe(Api.webApp)
                 )
                 .ConfigureServices(fun services ->
-                    // ✅ registramos Giraffe y la política CORS
+                    // registramos Giraffe y la política CORS
                     services.AddGiraffe() |> ignore
                     services.AddCors(fun options ->
                         options.AddPolicy("AllowFrontend", fun policy ->
