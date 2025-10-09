@@ -4,16 +4,16 @@
     <RestoreSuccess Condition=" '$(RestoreSuccess)' == '' ">True</RestoreSuccess>
     <RestoreTool Condition=" '$(RestoreTool)' == '' ">NuGet</RestoreTool>
     <ProjectAssetsFile Condition=" '$(ProjectAssetsFile)' == '' ">$(MSBuildThisFileDirectory)project.assets.json</ProjectAssetsFile>
-    <NuGetPackageRoot Condition=" '$(NuGetPackageRoot)' == '' ">/home/sharonblancopiedra/.nuget/packages/</NuGetPackageRoot>
-    <NuGetPackageFolders Condition=" '$(NuGetPackageFolders)' == '' ">/home/sharonblancopiedra/.nuget/packages/</NuGetPackageFolders>
+    <NuGetPackageRoot Condition=" '$(NuGetPackageRoot)' == '' ">/Users/alex/.nuget/packages/</NuGetPackageRoot>
+    <NuGetPackageFolders Condition=" '$(NuGetPackageFolders)' == '' ">/Users/alex/.nuget/packages/</NuGetPackageFolders>
     <NuGetProjectStyle Condition=" '$(NuGetProjectStyle)' == '' ">PackageReference</NuGetProjectStyle>
     <NuGetToolVersion Condition=" '$(NuGetToolVersion)' == '' ">6.14.0</NuGetToolVersion>
   </PropertyGroup>
   <ItemGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
-    <SourceRoot Include="/home/sharonblancopiedra/.nuget/packages/" />
+    <SourceRoot Include="/Users/alex/.nuget/packages/" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
-    <PkgFSharp_Core Condition=" '$(PkgFSharp_Core)' == '' ">/home/sharonblancopiedra/.nuget/packages/fsharp.core/9.0.101</PkgFSharp_Core>
-    <PkgGiraffe Condition=" '$(PkgGiraffe)' == '' ">/home/sharonblancopiedra/.nuget/packages/giraffe/7.0.2</PkgGiraffe>
+    <PkgFSharp_Core Condition=" '$(PkgFSharp_Core)' == '' ">/Users/alex/.nuget/packages/fsharp.core/9.0.303</PkgFSharp_Core>
+    <PkgGiraffe Condition=" '$(PkgGiraffe)' == '' ">/Users/alex/.nuget/packages/giraffe/7.0.2</PkgGiraffe>
   </PropertyGroup>
 </Project>

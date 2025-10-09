@@ -1,27 +1,26 @@
 {
   "format": 1,
   "restore": {
-    "/home/sharonblancopiedra/Documents/V SEMESTRE/LENGUAJES/SEMANA 9/ProyectoLenguajes/ProyectoLenguajes.fsproj": {}
+    "/Users/alex/Documents/TEC/Semestre Actual/Lenguajes de Programación/II Proyecto/Proyecto/Sin título/ProyectoLenguajes.fsproj": {}
   },
   "projects": {
-    "/home/sharonblancopiedra/Documents/V SEMESTRE/LENGUAJES/SEMANA 9/ProyectoLenguajes/ProyectoLenguajes.fsproj": {
+    "/Users/alex/Documents/TEC/Semestre Actual/Lenguajes de Programación/II Proyecto/Proyecto/Sin título/ProyectoLenguajes.fsproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/sharonblancopiedra/Documents/V SEMESTRE/LENGUAJES/SEMANA 9/ProyectoLenguajes/ProyectoLenguajes.fsproj",
+        "projectUniqueName": "/Users/alex/Documents/TEC/Semestre Actual/Lenguajes de Programación/II Proyecto/Proyecto/Sin título/ProyectoLenguajes.fsproj",
         "projectName": "ProyectoLenguajes",
-        "projectPath": "/home/sharonblancopiedra/Documents/V SEMESTRE/LENGUAJES/SEMANA 9/ProyectoLenguajes/ProyectoLenguajes.fsproj",
-        "packagesPath": "/home/sharonblancopiedra/.nuget/packages/",
-        "outputPath": "/home/sharonblancopiedra/Documents/V SEMESTRE/LENGUAJES/SEMANA 9/ProyectoLenguajes/obj/",
+        "projectPath": "/Users/alex/Documents/TEC/Semestre Actual/Lenguajes de Programación/II Proyecto/Proyecto/Sin título/ProyectoLenguajes.fsproj",
+        "packagesPath": "/Users/alex/.nuget/packages/",
+        "outputPath": "/Users/alex/Documents/TEC/Semestre Actual/Lenguajes de Programación/II Proyecto/Proyecto/Sin título/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/sharonblancopiedra/.nuget/NuGet/NuGet.Config"
+          "/Users/alex/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
         ],
         "sources": {
-          "/usr/lib64/dotnet/library-packs": {},
-          "/usr/lib64/dotnet/sdk/9.0.110/FSharp/library-packs": {},
+          "/usr/local/share/dotnet/sdk/9.0.305/FSharp/library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -35,7 +34,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.100"
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net9.0": {
@@ -44,7 +43,7 @@
             "FSharp.Core": {
               "include": "Runtime, Compile, Build, Native, Analyzers, BuildTransitive",
               "target": "Package",
-              "version": "[9.0.101, )",
+              "version": "[9.0.303, )",
               "generatePathProperty": true
             },
             "Giraffe": {
@@ -72,7 +71,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/lib64/dotnet/sdk/9.0.110/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.305/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

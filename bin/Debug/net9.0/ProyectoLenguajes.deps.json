@@ -8,18 +8,18 @@
     ".NETCoreApp,Version=v9.0": {
       "ProyectoLenguajes/1.0.0": {
         "dependencies": {
-          "FSharp.Core": "9.0.101",
+          "FSharp.Core": "9.0.303",
           "Giraffe": "7.0.2"
         },
         "runtime": {
           "ProyectoLenguajes.dll": {}
         }
       },
-      "FSharp.Core/9.0.101": {
+      "FSharp.Core/9.0.303": {
         "runtime": {
           "lib/netstandard2.1/FSharp.Core.dll": {
             "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.1.125.7007"
+            "fileVersion": "9.3.325.36101"
           }
         },
         "resources": {
@@ -66,7 +66,7 @@
       },
       "FSharp.SystemTextJson/1.3.13": {
         "dependencies": {
-          "FSharp.Core": "9.0.101",
+          "FSharp.Core": "9.0.303",
           "System.Text.Json": "8.0.5"
         },
         "runtime": {
@@ -78,7 +78,7 @@
       },
       "Giraffe/7.0.2": {
         "dependencies": {
-          "FSharp.Core": "9.0.101",
+          "FSharp.Core": "9.0.303",
           "FSharp.SystemTextJson": "1.3.13",
           "Giraffe.ViewEngine": "1.4.0",
           "Microsoft.IO.RecyclableMemoryStream": "3.0.1",
@@ -93,7 +93,7 @@
       },
       "Giraffe.ViewEngine/1.4.0": {
         "dependencies": {
-          "FSharp.Core": "9.0.101"
+          "FSharp.Core": "9.0.303"
         },
         "runtime": {
           "lib/net5.0/Giraffe.ViewEngine.dll": {
@@ -119,12 +119,12 @@
       "serviceable": false,
       "sha512": ""
     },
-    "FSharp.Core/9.0.101": {
+    "FSharp.Core/9.0.303": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-rAS0Pkf1mM9JQ3ksCzAxgzCv/AnIpzpSTHgCjXvHY8pfA2eMmwNtBHqr3AHTNGC/wh9fNvW2vrDyuVP/Qic9pw==",
-      "path": "fsharp.core/9.0.101",
-      "hashPath": "fsharp.core.9.0.101.nupkg.sha512"
+      "sha512": "sha512-6JlV8aD8qQvcmfoe/PMOxCHXc0uX4lR23u0fAyQtnVQxYULLoTZgwgZHSnRcuUHOvS3wULFWcwdnP1iwslH60g==",
+      "path": "fsharp.core/9.0.303",
+      "hashPath": "fsharp.core.9.0.303.nupkg.sha512"
     },
     "FSharp.SystemTextJson/1.3.13": {
       "type": "package",

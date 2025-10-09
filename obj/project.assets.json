@@ -2,7 +2,7 @@
   "version": 3,
   "targets": {
     "net9.0": {
-      "FSharp.Core/9.0.101": {
+      "FSharp.Core/9.0.303": {
         "type": "package",
         "compile": {
           "lib/netstandard2.1/FSharp.Core.dll": {
@@ -144,14 +144,15 @@
     }
   },
   "libraries": {
-    "FSharp.Core/9.0.101": {
-      "sha512": "rAS0Pkf1mM9JQ3ksCzAxgzCv/AnIpzpSTHgCjXvHY8pfA2eMmwNtBHqr3AHTNGC/wh9fNvW2vrDyuVP/Qic9pw==",
+    "FSharp.Core/9.0.303": {
+      "sha512": "6JlV8aD8qQvcmfoe/PMOxCHXc0uX4lR23u0fAyQtnVQxYULLoTZgwgZHSnRcuUHOvS3wULFWcwdnP1iwslH60g==",
       "type": "package",
-      "path": "fsharp.core/9.0.101",
+      "path": "fsharp.core/9.0.303",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "Icon.png",
-        "fsharp.core.9.0.101.nupkg.sha512",
+        "fsharp.core.9.0.303.nupkg.sha512",
         "fsharp.core.nuspec",
         "lib/netstandard2.0/FSharp.Core.dll",
         "lib/netstandard2.0/FSharp.Core.xml",
@@ -334,31 +335,30 @@
   },
   "projectFileDependencyGroups": {
     "net9.0": [
-      "FSharp.Core >= 9.0.101",
+      "FSharp.Core >= 9.0.303",
       "Giraffe >= 7.0.2"
     ]
   },
   "packageFolders": {
-    "/home/sharonblancopiedra/.nuget/packages/": {}
+    "/Users/alex/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/sharonblancopiedra/Documents/V SEMESTRE/LENGUAJES/SEMANA 9/ProyectoLenguajes/ProyectoLenguajes.fsproj",
+      "projectUniqueName": "/Users/alex/Documents/TEC/Semestre Actual/Lenguajes de Programación/II Proyecto/Proyecto/Sin título/ProyectoLenguajes.fsproj",
       "projectName": "ProyectoLenguajes",
-      "projectPath": "/home/sharonblancopiedra/Documents/V SEMESTRE/LENGUAJES/SEMANA 9/ProyectoLenguajes/ProyectoLenguajes.fsproj",
-      "packagesPath": "/home/sharonblancopiedra/.nuget/packages/",
-      "outputPath": "/home/sharonblancopiedra/Documents/V SEMESTRE/LENGUAJES/SEMANA 9/ProyectoLenguajes/obj/",
+      "projectPath": "/Users/alex/Documents/TEC/Semestre Actual/Lenguajes de Programación/II Proyecto/Proyecto/Sin título/ProyectoLenguajes.fsproj",
+      "packagesPath": "/Users/alex/.nuget/packages/",
+      "outputPath": "/Users/alex/Documents/TEC/Semestre Actual/Lenguajes de Programación/II Proyecto/Proyecto/Sin título/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/sharonblancopiedra/.nuget/NuGet/NuGet.Config"
+        "/Users/alex/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
       ],
       "sources": {
-        "/usr/lib64/dotnet/library-packs": {},
-        "/usr/lib64/dotnet/sdk/9.0.110/FSharp/library-packs": {},
+        "/usr/local/share/dotnet/sdk/9.0.305/FSharp/library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -372,7 +372,7 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "9.0.100"
+      "SdkAnalysisLevel": "9.0.300"
     },
     "frameworks": {
       "net9.0": {
@@ -381,7 +381,7 @@
           "FSharp.Core": {
             "include": "Runtime, Compile, Build, Native, Analyzers, BuildTransitive",
             "target": "Package",
-            "version": "[9.0.101, )",
+            "version": "[9.0.303, )",
             "generatePathProperty": true
           },
           "Giraffe": {
@@ -409,7 +409,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/lib64/dotnet/sdk/9.0.110/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.305/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
